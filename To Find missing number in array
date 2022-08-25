@@ -1,0 +1,28 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int a[] = {0,4,2,5,1};
+    int n = sizeof(a)/sizeof(int);
+    int tsum = n*(n+1)/2;
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        sum=sum+a[i];
+    }
+    cout<<"missing number is "<<tsum-sum;
+   
+// second method;
+int ans = 0;
+for(int i=0;i<n;i++)
+{
+    ans=ans^a[i];
+}
+for(int i=0;i<=n;i++)
+{
+    ans=ans^i;
+}
+cout<<"missing number"<<ans<<endl;
+return 0;
+}
