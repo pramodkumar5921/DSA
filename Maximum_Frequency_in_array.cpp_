@@ -1,0 +1,23 @@
+#include<iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+int main() {
+	char a[1001];
+	cin.getline(a,1001);
+	int freq[26]={0};
+	for(int i=0;a[i]!='\0';i++){
+		int d=a[i]-'a';
+		freq[d]=freq[d]+1;
+	}
+	int ans1=INT_MIN,ans2;
+	for(int i=0;i<26;i++){
+		if(freq[i]>ans1){
+			ans1=freq[i];
+			 ans2=i;
+		}
+	}
+	char  ch = ans2 +'a';
+	cout<<ch;
+	return 0;
+}
