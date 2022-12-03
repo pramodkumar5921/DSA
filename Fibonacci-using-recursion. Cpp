@@ -1,0 +1,8 @@
+int fun(int n) {
+// base case
+if(n<=1) {
+Return n;
+}
+Return fun(n-1) +fun(n-2) ;
+}
+};
