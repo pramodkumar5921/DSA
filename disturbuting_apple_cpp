@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int M=1e9+7;
+long long mod(long long x){
+    return (x%M+M)%M;
+}
+long long multiple(long long a,long long b){
+    return mod(mod(a)*mod(b));
+}
+long long inverse(long long a,long long n){
+    long long res = 1;
+    while(n>0){
+        if(n%2==1){
+            res = multiple(res,a);
+            n--;
+        }
+        a = multiple(a,a);
+        n = n/2;
+    }
+    return res;
+}
+long long divide(long long a,long long b){
+    return multiple(a,inverse(b,M-2));
+}
+int main(){
+    int n,m;
+    cin>>n>>m;
+    int size = m+n+1;
+    vector<long long>fact(size,1);
+    for(int i=1;i<size;i++){
+        fact[i] = mod(mod(fact[i-1])*mod(i));
+    }
+    cout<<divide(fact[n+m-1],multiple(fact[n-1],fact[m]))<<endl;
+   return 0;    
+}
