@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int dx[]={1,-1,0,0};
+int dy[]={0,0,1,-1};
+char d[]={'D','U','R','L'};
+bool isvalid( vector<vector<bool>> &arr,int i,int j,vector<vector<int>>&vis){
+  int n=arr.size();
+  return (i>=0 and i<n and j>=0 and arr[i][j]==1 and !vis[i][j]);
+}
+
+void path(vector<vector<bool>> &arr,vector<string>&ans,int x,int y,string &currpath,vector<vector<int>>&vis){
+  if(arr[x][y]==0){
+    return;
+  }
+  int n=arr.size();
+  if(x==n-1 and y==n-1){
+    ans.push_back(currpath);
+    return;
+  }
+  // recursive part
+  vis[x][y]=true;
+
+  for(int i=0;i<4;i++){
+    int nx=x+dx[i];
+    int ny=y+dy[i];
+
+    if(isvalid(arr,nx,ny,vis)){
+       currpath.push_back(d[i]);
+       path(arr,ans,nx,ny,currpath,vis);
+       currpath.pop_back();
+    }
+  }
+  vis[x][y]=false;
+  return;
+}
+vector<string> findAllPaths( vector<vector<bool>> &arr){
+  vector<string>ans;
+int n=arr.size();
+string s;
+vector<vector<int>>vis(n+1,vector<int>(n+1,0));
+path(arr,ans,0,0,s,vis);
+  return ans;
+}
